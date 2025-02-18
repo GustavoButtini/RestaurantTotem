@@ -1,9 +1,10 @@
 import React from "react";
+
 import { Button } from "@/components/ui/button";
 
 const Main = () => {
   return (
-    <div className="p-5 border border-gray-200 rounded-md">
+    <div className="rounded-md border border-gray-200 p-5">
       <Button variant="secondary">Comer aqui</Button>
     </div>
   );
