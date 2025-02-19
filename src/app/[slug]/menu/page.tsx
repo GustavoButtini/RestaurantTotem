@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 
 import { getRestaurantBySlug } from "@/data/get-restaurant-by-slug";
 
+import RestaurantCategories from "./components/categories";
 import NavButton from "./components/navButton";
 
 interface RestaurantPageMenuParams{
@@ -23,6 +24,7 @@ const RestaurantPageMenu = async({params,searchParams} : RestaurantPageMenuParam
     const res = await getRestaurantBySlug(slug);
     return (
     <div>
+        {/* Header of page */}
         <div className="relative h-[250px] w-full ">
             <NavButton
                 icon="back"
@@ -41,6 +43,10 @@ const RestaurantPageMenu = async({params,searchParams} : RestaurantPageMenuParam
                 route="order"
             />
         </div>
+        {/* Pre title */}
+        <RestaurantCategories 
+        res={res}
+        />
     </div>);
 }
  
