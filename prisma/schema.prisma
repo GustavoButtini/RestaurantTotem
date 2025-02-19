@@ -16,7 +16,7 @@ datasource db {
 model Restaurant {
   id String @id @default(uuid())
   name           String
-  slug           String
+  slug           String @unique
   description    String
   avatarImageUrl String
   coverImageUrl  String
@@ -39,7 +39,7 @@ model MenuCategory {
 model Product {
   id           String            @id @default(uuid())
   name         String
-  slug         String
+  slug         String @unique
   description  String
   price        Float
   imageUrl     String
