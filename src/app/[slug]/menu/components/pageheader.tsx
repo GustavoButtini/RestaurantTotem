@@ -15,7 +15,7 @@ interface PageHeaderParams{
 const PageHeader = ({imageheader,imagealt}:PageHeaderParams) => {
     const router = useRouter();
     return (
-    <div className={`relative h-64 w-full`}>
+    <div className={`relative min-h-64 w-full`}>
         <Button variant={"secondary"} size={"icon"} className="absolute top-4 left-4 rounded-full z-50" onClick={() => {router.back()}}>
             <ChevronLeftCircleIcon />
         </Button>

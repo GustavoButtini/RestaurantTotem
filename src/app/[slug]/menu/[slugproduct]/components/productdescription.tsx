@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ProductsDescriptionParams{
     prod: Prisma.ProductGetPayload<{include:{restaurant:{select:{name:true,avatarImageUrl:true}}}}>
@@ -13,8 +14,8 @@ interface ProductsDescriptionParams{
 const ProductsDescription = ({prod}:ProductsDescriptionParams) => {
     const [quantity,setQuantity] = useState(1);
     return (  
-        <div className="relative z-50 rounded-t-3xl p-5 flex flex-auto flex-col">
-            <div className="flex-auto">
+        <div className="relative z-50 rounded-t-3xl p-5 flex flex-auto flex-col overflow-hidden">
+            <div className="flex-auto overflow-hidden">
                 {/*Product header */}
                 <div className="flex items-center gap-1">
                     <Image 
@@ -43,20 +44,24 @@ const ProductsDescription = ({prod}:ProductsDescriptionParams) => {
                         </Button>
                     </div>
                 </div>
+ 
+                <ScrollArea className="h-full">
                 {/* Product description */}
-                <div className="mt-6 space-y-3">
-                    <h4 className="text-xl font-semibold">Sobre</h4>
-                    <p className="text-xs text-muted-foreground">{prod.description}</p>
-                </div>
-
+                    <div className="mt-6 space-y-3">
+                        <h4 className="text-xl font-semibold">Sobre</h4>
+                        <p className="text-xs text-muted-foreground">{prod.description}</p>
+                    </div>                    
                 {/*Product ingredients */}
-                <div className="mt-10 space-y-2">
-                    <div className="flex items-center gap-1 5">
-                        <ChefHatIcon size={18}/>
-                        <h5 className="text-xl font-semibold">Ingredientes</h5>
-                    </div>
-                    <p className="text-xs text-muted-foreground">{prod.ingredients}</p>
-                </div>
+                    <div className="mt-10 space-y-2">
+                        <div className="flex items-center gap-1 5">
+                            <ChefHatIcon size={18}/>
+                            <h5 className="text-xl font-semibold">Ingredientes</h5>
+                        </div>
+                        <ul className="list-disc px-5 text-sm text-muted-foreground">
+                            {prod.ingredients.map((ingredient) => (<li key={ingredient}>{ingredient}</li>))}
+                        </ul>
+                    </div> 
+                </ScrollArea>
             </div>
             <Button className="mt-6 w-full rounded-full">
                     Adicionar à sacola
