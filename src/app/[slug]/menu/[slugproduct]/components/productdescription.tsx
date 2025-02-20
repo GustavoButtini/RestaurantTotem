@@ -15,8 +15,15 @@ interface ProductsDescriptionParams{
 }
 
 const ProductsDescription = ({prod}:ProductsDescriptionParams) => {
-    const {toggleCart} = useContext(CartContext)
+    const {toggleCart,addProduct} = useContext(CartContext)
     const [quantity,setQuantity] = useState(1);
+    const handleAddToCart = () =>{
+        addProduct({
+            ...prod,
+            quantity,
+        })
+        toggleCart()
+    }
     return (  
         <>
         <div className="relative z-50 rounded-t-3xl p-5 flex flex-auto flex-col overflow-hidden">
@@ -38,7 +45,7 @@ const ProductsDescription = ({prod}:ProductsDescriptionParams) => {
 
                 {/*Product price and amout controller */}
                 <div className="mt-2 flex items-center justify-between">
-                    <p className="text-2xl">{new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(prod.price)}</p>
+                    <p className="text-2xl">{}</p>
                     <div className="flex items-center gap-4">
                         <Button variant={"outline"} className="h-8 w-8 rounded-xl" onClick={()=>{setQuantity(quantity == 1? 1:quantity-1)}}>
                             <Minus />
@@ -68,7 +75,7 @@ const ProductsDescription = ({prod}:ProductsDescriptionParams) => {
                     </div> 
                 </ScrollArea>
             </div>
-            <Button className="mt-6 w-full rounded-full" onClick={()=>{toggleCart()}}>
+            <Button className="mt-6 w-full rounded-full" onClick={()=>{handleAddToCart()}}>
                     Adicionar à sacola
             </Button>
         </div>
