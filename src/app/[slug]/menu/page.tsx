@@ -27,9 +27,7 @@ const RestaurantPageMenu = async({params,searchParams} : RestaurantPageMenuParam
         {/* Header of page */}
         <PageHeader
             imageheader={res.coverImageUrl}
-            imagealt={res.name}
-            height="250px"
-            imageCl="object-cover"
+            imagealt={res.name} 
         />
         {/* Pre title */}
         <RestaurantCategories 
