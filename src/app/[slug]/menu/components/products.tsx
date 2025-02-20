@@ -13,7 +13,7 @@ const ProductLister = ({products}:ProductListerParams) => {
         <div className="space-y-3">
             {products.map(product =>(
                 
-                <Link href={product.slug} key={product.id} className="flex items-center justify-between border-b gap-10 py-5">
+                <Link href={`./menu/${product.slug}`} key={product.id} className="flex items-center justify-between border-b gap-10 py-5">
                     {/*Left Side */}
                     <div className="">
                         <h3 className="text-sm font-medium">{product.name}</h3>

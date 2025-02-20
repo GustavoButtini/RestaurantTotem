@@ -1,10 +1,10 @@
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 
 import { getRestaurantBySlug } from "@/data/get-restaurant-by-slug";
 
 import RestaurantCategories from "./components/categories";
-import NavButton from "./components/navButton";
+import PageHeader from "./components/pageheader";
 
 interface RestaurantPageMenuParams{
     params: Promise<{slug:string}>
@@ -25,24 +25,12 @@ const RestaurantPageMenu = async({params,searchParams} : RestaurantPageMenuParam
     return (
     <div>
         {/* Header of page */}
-        <div className="relative h-[250px] w-full ">
-            <NavButton
-                icon="back"
-                position="left"
-                route="back"
-            />
-            <Image
-                src={res.coverImageUrl}
-                alt={res.name}
-                fill
-                className="object-cover"
-            />
-            <NavButton
-                icon="order"
-                position="right"
-                route="order"
-            />
-        </div>
+        <PageHeader
+            imageheader={res.coverImageUrl}
+            imagealt={res.name}
+            height="250px"
+            imageCl="object-cover"
+        />
         {/* Pre title */}
         <RestaurantCategories 
         res={res}
