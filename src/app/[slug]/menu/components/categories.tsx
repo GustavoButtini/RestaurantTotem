@@ -3,12 +3,15 @@
 import { Prisma} from "@prisma/client";
 import { ClockIcon } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { MoneyFormat } from "@/helpers/moneyFormat";
 
+import { CartContext } from "../contexts/cart";
 import ProductLister from "./products";
+import ShippingCart from "./shippingcart";
 
 interface RestaurantCategoriesParams{
     res:Prisma.RestaurantGetPayload<{
@@ -30,6 +33,7 @@ const RestaurantCategories = ({res}:RestaurantCategoriesParams) => {
     const handleCategoryOnClick = (clickedCategory:MenuCategoryWithProducts) => {
         setSelectedCategory(clickedCategory)
     }
+    const {products,total,totalQuantity,toggleCart} = useContext(CartContext);
     return (  
         <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl border bg-white p-5">
             <div className="p-5">
@@ -58,6 +62,23 @@ const RestaurantCategories = ({res}:RestaurantCategoriesParams) => {
 
             <h3 className="py-5 font-semibold">{selectedCategory.name}</h3>
             <ProductLister products={selectedCategory.products}/>
+            {products.length > 0 &&(
+                <div className="fixed bottom-0 left-0 rigth-0 flex items-center justify-between w-full p-4 bg-white border-t border-g px-5 py-3">
+                    <div>
+                        <p className="text-xs text-muted-foreground" >
+                            Total dos Pedidos
+                        </p>
+                        <p className="text-sm font-semibold">
+                            {MoneyFormat(total)} 
+                            <span className="text-xs font-normal text-muted-foreground">/ {totalQuantity} {totalQuantity > 1 ? "itens" : "item"}</span>
+                        </p>
+                    </div>
+                    <Button onClick={()=>{toggleCart()}}>
+                        Ver Sacola
+                    </Button>
+                    <ShippingCart/>
+                </div>
+            ) }
         </div>
     );
 }
