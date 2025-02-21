@@ -14,32 +14,33 @@ datasource db {
 }
 
 model Restaurant {
-  id String @id @default(uuid())
+  id             String         @id @default(uuid())
   name           String
-  slug           String @unique
+  slug           String         @unique
   description    String
   avatarImageUrl String
   coverImageUrl  String
   menuCategories MenuCategory[]
   products       Product[]
-  createdAt      DateTime @default(now())
-  updateAt       DateTime @updatedAt
+  orders         Order[]
+  createdAt      DateTime       @default(now())
+  updateAt       DateTime       @updatedAt
 }
 
 model MenuCategory {
-  id String @id @default(uuid())
+  id           String     @id @default(uuid())
   name         String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   restaurantId String
   products     Product[]
-  createdAt    DateTime @default(now())
-  updateAt     DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updateAt     DateTime   @updatedAt
 }
 
 model Product {
-  id           String            @id @default(uuid())
+  id           String         @id @default(uuid())
   name         String
-  slug         String @unique
+  slug         String         @unique
   description  String
   price        Float
   imageUrl     String
@@ -49,16 +50,22 @@ model Product {
   restaurantId String
   categoryId   String
   orderProduct OrderProduct[]
-  createdAt    DateTime @default(now())
-  updateAt     DateTime @updatedAt
+  createdAt    DateTime       @default(now())
+  updateAt     DateTime       @updatedAt
 }
 
 model Order {
-  id                String               @id @default(uuid())
+  id                String            @id @default(uuid())
   total             Float
   status            orderStatus
   consumptionMethod consumptionMethod
+  restaurant        Restaurant        @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  restaurantId      String
   orderProduct      OrderProduct[]
+  createdAt         DateTime          @default(now())
+  updateAt          DateTime          @updatedAt
+  customerName      String
+  customerCPF       String
 }
 
 model OrderProduct {
