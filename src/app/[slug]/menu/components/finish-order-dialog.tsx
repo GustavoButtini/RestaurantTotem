@@ -15,7 +15,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -92,13 +91,7 @@ const FinishOrderDialog = ({ open, onOpenChange }: FinishOrderDialogParams) => {
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Hello World</DrawerTitle>
-          <DrawerDescription>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet,
-            voluptatum deserunt. Architecto officia eveniet numquam. Vero
-            laboriosam amet magni nisi error, ea ut eveniet et debitis nihil
-            tempora excepturi necessitatibus?
-          </DrawerDescription>
+          <DrawerTitle>Finalizar pedido</DrawerTitle>
         </DrawerHeader>
         <div className="p-5">
           <Form {...form}>

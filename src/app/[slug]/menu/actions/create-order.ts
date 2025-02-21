@@ -1,6 +1,7 @@
 "use server";
 
 import { consumptionMethod } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 import { db } from "@/lib/prisma";
 
@@ -50,10 +51,11 @@ export const createOrder = async (input: CreateOrderInput) => {
         },
       },
       total: prodsWithPricesAndQuantities.reduce(
-        (acc, product) => acc + product.price + product.quantity,
+        (acc, product) => acc + product.price * product.quantity,
         0,
       ),
       restaurantId: res!.id,
     },
   });
+  redirect(`/${input.slug}/orders?cpf=${removeCpfPunctionation(input.customerCPF)}`)
 };

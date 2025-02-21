@@ -32,7 +32,7 @@ export const CartContext = createContext<ICartContext>({
 export const CartProvider = ({children} : {children: ReactNode}) =>{
     const [products,setProducts] = useState<CartProduct[]>([])
     const [isOpen,setIsOpen] = useState<boolean>(false)
-    const total = products.reduce((accumulator,prod) => {return accumulator + prod.price * prod.quantity},0)
+    const total = products.reduce((accumulator,prod) => {return accumulator + (prod.price * prod.quantity)},0)
     const toggleCart = () =>{
         setIsOpen(prev => !prev);
     }
