@@ -35,7 +35,7 @@ const OrderList = ({orders}:OrderListParams) => {
         <div className="space-y-6 p6 flex flex-col">
             {/* Header */}
             <div className="relative min-h-16 w-full">
-                <Button variant={"secondary"} size={"icon"} className="absolute top-4 left-4 rounded-full z-50" onClick={() => {router.back()}}>
+                <Button variant={"secondary"} size={"icon"} className="absolute top-4 left-4 rounded-full z-50" onClick={() => {router.replace("/")}}>
                     <ChevronLeftCircleIcon />
                 </Button>
                 <Button variant={"secondary"} size={"icon"} className="absolute top-4 right-4 rounded-full z-50" onClick={() => {toggleCart()}}> 

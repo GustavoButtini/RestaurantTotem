@@ -19,7 +19,7 @@ const PageHeader = ({imageheader,imagealt}:PageHeaderParams) => {
 
     return (
     <div className={`relative min-h-64 w-full`}>
-        <Button variant={"secondary"} size={"icon"} className="absolute top-4 left-4 rounded-full z-50" onClick={() => {router.replace("/")}}>
+        <Button variant={"secondary"} size={"icon"} className="absolute top-4 left-4 rounded-full z-50" onClick={() => {router.back()}}>
             <ChevronLeftCircleIcon />
         </Button>
         <Image src={imageheader} alt={imagealt} fill className="object-cover"/>
