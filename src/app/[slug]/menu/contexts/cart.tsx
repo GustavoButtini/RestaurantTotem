@@ -11,6 +11,9 @@ export interface ICartContext{
     products:CartProduct[]
     toggleCart: () => void
     addProduct: (prod:CartProduct) => void
+    decreaseProductQuantity : (prodid:string) => void
+    increaseProductQuantity : (prodid:string) => void
+    deleteProduct: (prodid:string) => void
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -18,6 +21,9 @@ export const CartContext = createContext<ICartContext>({
    products:[],
    toggleCart: () => {},
    addProduct: () => {},
+   decreaseProductQuantity: () => {},
+   increaseProductQuantity: () => {},
+   deleteProduct: ()=>{},
 })
 export const CartProvider = ({children} : {children: ReactNode}) =>{
     const [products,setProducts] = useState<CartProduct[]>([])
@@ -42,8 +48,33 @@ export const CartProvider = ({children} : {children: ReactNode}) =>{
                 })
             })
     }
+    const decreaseProductQuantity = (prodid:string) =>{
+        setProducts(prevprods =>{
+            return prevprods.map(prevprod =>{
+                if(prevprod.id === prodid){
+                    return {...prevprod, quantity: prevprod.quantity == 1 ? prevprod.quantity : prevprod.quantity -1}
+                }
+                return prevprod;
+            })
+        })
+    }
+    const increaseProductQuantity = (prodid:string) =>{
+        setProducts(prevprods =>{
+            return prevprods.map(prevprod =>{
+                if(prevprod.id === prodid){
+                    return {...prevprod, quantity: prevprod.quantity +1}
+                }
+                return prevprod
+            })
+        })
+    }
+    
+    const deleteProduct = (prodid:string)=>{
+        setProducts(products.filter((prevprod) => prevprod.id != prodid))
+    }
+    
     return(
-        <CartContext.Provider value={{isOpen,products,toggleCart,addProduct,}}> 
+        <CartContext.Provider value={{isOpen,products,toggleCart,addProduct,decreaseProductQuantity,increaseProductQuantity,deleteProduct}}> 
             {children}
         </CartContext.Provider>
     )

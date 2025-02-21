@@ -1,17 +1,18 @@
-
 import { ChevronLeftIcon, ChevronRightIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
+import { useContext } from "react";
 
 import { Button } from "@/components/ui/button";
 import { MoneyFormat } from "@/helpers/moneyFormat";
 
-import { CartProduct } from "../contexts/cart";
+import { CartContext, CartProduct } from "../contexts/cart";
 interface CartProductItemParams{
     prod: CartProduct
 }
 
 
 const CartProductItem = ({prod}:CartProductItemParams) => {
+    const {increaseProductQuantity,decreaseProductQuantity,deleteProduct} = useContext(CartContext)
     return (               
     <div key={prod.id} className="flex items-center justify-between py-5">
         <div className="flex items-center gap-3">
@@ -28,18 +29,18 @@ const CartProductItem = ({prod}:CartProductItemParams) => {
                 <p className="text-xs max-w-[90%] truncate text-ellipsis">{prod.quantity}x {prod.name} </p>
                 <p className="text-sm font-semibold">{MoneyFormat(prod.price*prod.quantity)}</p>
                 <div className="flex items-center gap-1 text-center">
-                    <Button className="h-7 w-7 rounded-lg"variant={"outline"}>
+                    <Button className="h-7 w-7 rounded-lg"variant={"outline"} onClick={() => decreaseProductQuantity(prod.id)}>
                         <ChevronLeftIcon />
                     </Button>
                     <p className="text-xs w-8">{prod.quantity}</p>
-                    <Button className="h-7 w-7 rounded-lg" variant={"destructive"}>
+                    <Button className="h-7 w-7 rounded-lg" variant={"destructive"} onClick={() => increaseProductQuantity(prod.id)}>
                         <ChevronRightIcon />
                     </Button>
                 </div>
             </div>            
         </div>
         {/* Right Side */}
-        <Button className="w-7 h-7" variant={"outline"}>
+        <Button className="w-7 h-7" variant={"outline"} onClick={()=>{deleteProduct(prod.id)}}>
             <TrashIcon/>
         </Button>
     </div> 
