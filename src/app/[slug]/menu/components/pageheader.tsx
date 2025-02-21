@@ -23,7 +23,7 @@ const PageHeader = ({imageheader,imagealt}:PageHeaderParams) => {
             <ChevronLeftCircleIcon />
         </Button>
         <Image src={imageheader} alt={imagealt} fill className="object-cover"/>
-        <Button variant={"secondary"} size={"icon"} className="absolute top-4 right-4 rounded-full z-50" onClick={() => {router.push(`${slug}/orders`)}}> 
+        <Button variant={"secondary"} size={"icon"} className="absolute top-4 right-4 rounded-full z-50" onClick={() => {router.replace(`${slug}/orders`)}}> 
             <ScrollTextIcon />
         </Button>
     </div>             
