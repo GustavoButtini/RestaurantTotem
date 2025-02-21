@@ -3,11 +3,9 @@
 import { ChevronLeftCircleIcon, ScrollTextIcon } from "lucide-react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import { useContext } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { CartContext } from "../contexts/cart";
 
 
 interface PageHeaderParams{
